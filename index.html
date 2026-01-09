@@ -26,10 +26,11 @@
 
   materias.forEach(materia => {
     materia.addEventListener("click", () => {
-      materia.style.textDecoration =
-        materia.style.textDecoration === "line-through"
-          ? "none"
-          : "line-through";
+      if (materia.style.textDecoration === "line-through") {
+        materia.style.textDecoration = "none";
+      } else {
+        materia.style.textDecoration = "line-through";
+      }
     });
   });
 </script>
