@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <style>
+  li {
+    cursor: pointer;
+    margin: 6px 0;
+  }
+
+  li.aprobada {
+    color: green;
+    text-decoration: line-through;
+    font-weight: bold;
+  }
+</style>
+
   <meta charset="UTF-8">
   <title>Malla Universitaria</title>
 </head>
@@ -26,11 +39,7 @@
 
   materias.forEach(materia => {
     materia.addEventListener("click", () => {
-      if (materia.style.textDecoration === "line-through") {
-        materia.style.textDecoration = "none";
-      } else {
-        materia.style.textDecoration = "line-through";
-      }
+      materia.classList.toggle("aprobada");
     });
   });
 </script>
