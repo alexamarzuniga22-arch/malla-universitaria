@@ -259,25 +259,66 @@ h1{
 </div>
 
 <script>
-const materias = document.querySelectorAll(".materia");
-const contador = document.getElementById("contador");
+let aprobadas = new Set();
+let contador = 0;
 
-function actualizar(){
-  const aprobadas = document.querySelectorAll(".materia.completada").length;
-  contador.textContent = "Materias aprobadas: " + aprobadas;
+const contadorDiv = document.getElementById("contador");
 
-  materias.forEach(m=>{
-    const req = m.dataset.req;
-    if(req){
-      const requisitos = req.split("|");
-      const cumplidos = requisitos.every(r=>{
-        const mat = [...materias].find(x => x.textContent === r);
-        return mat && mat.classList.contains("completada");
-      });
-      m.classList.toggle("bloqueada", !cumplidos);
+// 👇 prerequisitos escritos con nombres EXACTOS
+const prerequisitos = {
+  "Química Médica II": ["Química Médica", "Matemáticas"],
+  "Inglés II": ["Inglés I"],
+  "Inglés III": ["Inglés II"],
+  "Bioestadística": ["Matemáticas"],
+  "Biofísica": ["Física Médica", "Biología Médica"],
+  "Introducción a la Salud Pública": ["Sociología", "Historia de Honduras"],
+  "Anatomía Macro": ["Biofísica", "Inglés III", "Educación Ambiental"],
+  "Embriología": ["Biofísica", "Inglés III", "Educación Ambiental"],
+  "Neuroanatomía": ["Biofísica", "Inglés III", "Educación Ambiental"],
+  "Anatomía Micro": ["Biofísica", "Inglés III", "Educación Ambiental"]
+};
+
+// 🔁 revisar si una materia puede desbloquearse
+function revisarBloqueos() {
+  document.querySelectorAll(".materia").forEach(materia => {
+    const nombre = materia.textContent.trim();
+    const reqs = prerequisitos[nombre];
+
+    if (!reqs) return;
+
+    const cumplidos = reqs.every(r => aprobadas.has(r));
+
+    if (cumplidos) {
+      materia.classList.remove("bloqueada");
+      materia.style.pointerEvents = "auto";
+    } else {
+      materia.classList.add("bloqueada");
+      materia.classList.remove("aprobada");
     }
   });
 }
+
+// 🖱️ click en materia
+document.querySelectorAll(".materia").forEach(materia => {
+  materia.addEventListener("click", () => {
+    const nombre = materia.textContent.trim();
+
+    if (materia.classList.contains("bloqueada")) return;
+
+    if (!materia.classList.contains("aprobada")) {
+      materia.classList.add("aprobada");
+      aprobadas.add(nombre);
+      contador++;
+      contadorDiv.textContent = `Materias aprobadas: ${contador}`;
+      revisarBloqueos();
+    }
+  });
+});
+
+// 🔒 bloquear al inicio
+revisarBloqueos();
+</script>
+
 
 materias.forEach(m=>{
   m.addEventListener("click", ()=>{
