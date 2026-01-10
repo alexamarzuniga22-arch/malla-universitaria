@@ -2,66 +2,90 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Plan de Estudios Medicina</title>
+<title>Medicina y Cirugía</title>
 
 <style>
 body{
-    font-family: "Georgia", serif;
-    background:#f6f1fb;
-    margin:0;
-    padding:30px;
+  margin:0;
+  padding:30px;
+  font-family:"Times New Roman", serif;
+  background:#f3ecff; /* lavanda casi blanco */
 }
 
-.grid{
-    display:grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap:25px;
+/* TÍTULO */
+h1{
+  text-align:center;
+  color:#5a2d82;
+  margin-bottom:30px;
 }
 
+/* MALLA GENERAL */
+.malla{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+  gap:25px;
+}
+
+/* TARJETA PERIODO */
 .periodo{
-    background:#d7c9f2;
-    border-radius:25px;
-    padding:20px;
+  background:#d7c9f1;
+  border-radius:20px;
+  padding:20px;
 }
 
+/* TÍTULO PERIODO */
 .periodo h2{
-    text-align:center;
-    color:#4b2e83;
-    margin-bottom:15px;
+  text-align:center;
+  color:#4b2673;
+  margin-bottom:15px;
 }
 
+/* LISTA NORMAL */
 .lista{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
 
+/* LISTA DOBLE (9-10 y 11-12) */
+.lista-doble{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+/* MATERIA */
 .materia{
-    background:#ede6fb;
-    border-radius:15px;
-    padding:8px;
-    text-align:center;
-    color:#3e2a6a;
-    font-size:15px;
+  background:#ebe3fa; /* materia clara */
+  color:#4b2673;
+  padding:8px 10px;
+  border-radius:10px;
+  cursor:pointer;
+  text-align:center;
+  transition:all 0.4s ease;
 }
 
-/* Periodos con materias a la par */
-.doble{
-    display:grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap:10px;
+/* TACHADA */
+.materia.completada{
+  background:#f0c7dd; /* rosa pastel */
+  color:#4b2673;
+  text-decoration:line-through;
 }
 
-/* Anchos especiales */
-.p9{ grid-column: span 2; }
-.p11{ grid-column: span 2; }
-.internado{ grid-column: span 1; }
+/* BLOQUEADA (lista para futuro) */
+.materia.bloqueada{
+  background:#c6bdd9; /* lila grisáceo */
+  color:#5e5670;
+  cursor:not-allowed;
+}
 </style>
 </head>
 
 <body>
 
-<div class="grid">
+<h1>Medicina y Cirugía</h1>
+
+<div class="malla">
 
 <!-- PERIODO 1 -->
 <div class="periodo">
@@ -117,10 +141,10 @@ body{
 <div class="periodo">
 <h2>Periodo 5</h2>
 <div class="lista">
-<div class="materia">Fisiología I</div>
-<div class="materia">Histología</div>
-<div class="materia">Genética</div>
-<div class="materia">Microbiología I</div>
+<div class="materia">Fisiología</div>
+<div class="materia">Bioquímica</div>
+<div class="materia">Psicología Médica</div>
+<div class="materia">Salud Pública I</div>
 </div>
 </div>
 
@@ -128,10 +152,10 @@ body{
 <div class="periodo">
 <h2>Periodo 6</h2>
 <div class="lista">
-<div class="materia">Fisiología II</div>
-<div class="materia">Microbiología II</div>
-<div class="materia">Inmunología</div>
-<div class="materia">Patología I</div>
+<div class="materia">Microbiología</div>
+<div class="materia">Genética</div>
+<div class="materia">Servicio Social Formativo</div>
+<div class="materia">Salud Pública II</div>
 </div>
 </div>
 
@@ -139,10 +163,10 @@ body{
 <div class="periodo">
 <h2>Periodo 7</h2>
 <div class="lista">
-<div class="materia">Patología II</div>
+<div class="materia">Patología I</div>
 <div class="materia">Farmacología I</div>
-<div class="materia">Semiología</div>
-<div class="materia">Parasitología</div>
+<div class="materia">Fisiopatología I</div>
+<div class="materia">Introducción a la Clínica I</div>
 </div>
 </div>
 
@@ -150,60 +174,54 @@ body{
 <div class="periodo">
 <h2>Periodo 8</h2>
 <div class="lista">
+<div class="materia">Patología II</div>
 <div class="materia">Farmacología II</div>
-<div class="materia">Propedéutica Clínica</div>
-<div class="materia">Salud Pública II</div>
+<div class="materia">Fisiopatología II</div>
+<div class="materia">Introducción a la Clínica II</div>
+<div class="materia">Psicopatología</div>
 </div>
 </div>
 
 <!-- PERIODO 9 Y 10 -->
-<div class="periodo p9">
+<div class="periodo">
 <h2>Periodo 9 y 10</h2>
-<div class="doble">
+<div class="lista-doble">
 <div class="materia">Cirugía I</div>
 <div class="materia">Medicina I</div>
-
 <div class="materia">Radiología</div>
 <div class="materia">Técnicas y Proc. Méd.</div>
-
 <div class="materia">Gineco Obstetricia I</div>
 <div class="materia">Pediatría</div>
-
 <div class="materia">Epidemiología</div>
 <div class="materia">Psiquiatría</div>
-
 <div class="materia">Salud Pública III</div>
 </div>
 </div>
 
 <!-- PERIODO 11 Y 12 -->
-<div class="periodo p11">
+<div class="periodo">
 <h2>Periodo 11 y 12</h2>
-<div class="doble">
+<div class="lista-doble">
 <div class="materia">Clínica Cirugía II</div>
 <div class="materia">Urología</div>
-
 <div class="materia">Clínica Médica II</div>
-<div class="materia">Clínica Gineco Obst.</div>
-
+<div class="materia">Clínica Gineco Obstetricia II</div>
 <div class="materia">Clínica Pediatría</div>
 <div class="materia">Oftalmología</div>
-
 <div class="materia">Medicina Legal</div>
 <div class="materia">Radiología II</div>
-
 <div class="materia">Neurología</div>
 <div class="materia">Dermatología</div>
 </div>
 </div>
 
 <!-- INTERNADO -->
-<div class="periodo internado">
+<div class="periodo">
 <h2>Internado Rotatorio</h2>
 <div class="lista">
 <div class="materia">Terapéutica Clínica</div>
 <div class="materia">Internado en Cirugía</div>
-<div class="materia">Internado en Gineco-Obst.</div>
+<div class="materia">Internado en Gineco-Obstetricia</div>
 <div class="materia">Internado en Medicina</div>
 <div class="materia">Internado en Pediatría</div>
 </div>
@@ -211,5 +229,16 @@ body{
 
 </div>
 
+<script>
+document.querySelectorAll(".materia").forEach(m=>{
+  m.addEventListener("click",()=>{
+    if(!m.classList.contains("bloqueada")){
+      m.classList.toggle("completada");
+    }
+  });
+});
+</script>
+
 </body>
 </html>
+
