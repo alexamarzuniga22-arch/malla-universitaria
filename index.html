@@ -5,11 +5,13 @@
 <title>Medicina y Cirugía</title>
 
   <style>
-body {
-    margin: 0;
-    font-family: "Georgia", serif;
-    background-color: #f4eefc; /* lila claro */
-    color: #4a2c7a;
+   body{
+  margin:0;
+  background: var(--fondo);
+  font-family: "Times New Roman", serif;
+  color: var(--texto);
+}
+
 }
 
 /* Título */
@@ -20,26 +22,29 @@ h1 {
 }
 
 /* Contador */
-#contador {
-    margin-left: 40px;
-    font-size: 18px;
-    font-weight: bold;
+#contador{
+  text-align: center;
+  font-size: 16px;
+  margin: 15px 0 25px 0;
+  font-weight: normal;
 }
 
+
 /* Contenedor general */
-.periodos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 35px; /* SEPARACIÓN REAL */
-    padding: 30px 40px 80px;
+.periodos{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
 }
 
 /* Cuadro grande */
-.periodo {
-    background-color: #d9cff2; /* morado más oscuro */
-    border-radius: 20px;
-    padding: 20px;
+.periodo{
+  background: var(--periodo);
+  border-radius: 22px;
+  padding: 20px;
 }
+
+
 
 /* Título del periodo */
 .periodo h2 {
@@ -49,14 +54,15 @@ h1 {
 }
 
 /* Materias */
-.materia {
-    background-color: #eee6fa; /* lila suave */
-    padding: 10px;
-    border-radius: 12px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.materia{
+  background: var(--materia);
+  color: var(--texto);
+  padding: 10px 14px;
+  border-radius: 14px;
+  margin: 8px 0;
+  transition: all 0.3s ease;
 }
+
 
 /* Hover */
 .materia:hover {
@@ -84,10 +90,11 @@ h1 {
 }
 
 /* Materia bloqueada */
-.materia.bloqueada {
-    background-color: #cfc6dd;
-    color: #7a7287;
-    cursor: not-allowed;
+.materia.bloqueada{
+  background: var(--tachado);
+  color: #6b5b95;
+  text-decoration: line-through;
+  cursor: not-allowed;
 }
 
 /* Botón */
@@ -114,7 +121,8 @@ button:hover {
 <body>
 
 <h1>Medicina y Cirugía</h1>
-<h2>Materias aprobadas: <span id="contador">0</span></h2>
+<div id="contador">Materias aprobadas: 0</div>
+
 
 <div class="grid">
 <div class="periodos">
