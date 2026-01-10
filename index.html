@@ -9,7 +9,7 @@ body{
   margin:0;
   padding:30px;
   font-family:"Times New Roman", serif;
-  background:#f3ecff; /* lavanda casi blanco */
+  background:#f3ecff;
 }
 
 /* TÍTULO */
@@ -19,11 +19,22 @@ h1{
   margin-bottom:30px;
 }
 
-/* MALLA GENERAL */
+/* MALLA GENERAL → SOLO 4 POR FILA */
 .malla{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns:repeat(4, 1fr);
   gap:25px;
+}
+
+/* RESPONSIVE (celular) */
+@media (max-width:1100px){
+  .malla{ grid-template-columns:repeat(3, 1fr); }
+}
+@media (max-width:800px){
+  .malla{ grid-template-columns:repeat(2, 1fr); }
+}
+@media (max-width:500px){
+  .malla{ grid-template-columns:1fr; }
 }
 
 /* TARJETA PERIODO */
@@ -47,7 +58,7 @@ h1{
   gap:10px;
 }
 
-/* LISTA DOBLE (9-10 y 11-12) */
+/* LISTA DOBLE (9–10 y 11–12) */
 .lista-doble{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -56,25 +67,28 @@ h1{
 
 /* MATERIA */
 .materia{
-  background:#ebe3fa; /* materia clara */
+  background:#ebe3fa;
   color:#4b2673;
   padding:8px 10px;
   border-radius:10px;
   cursor:pointer;
   text-align:center;
-  transition:all 0.4s ease;
+  transition:
+    background 0.4s ease,
+    color 0.4s ease,
+    text-decoration 0.4s ease;
 }
 
-/* TACHADA */
+/* CLASE YA CURSADA (TACHADA) */
 .materia.completada{
   background:#f0c7dd; /* rosa pastel */
   color:#4b2673;
   text-decoration:line-through;
 }
 
-/* BLOQUEADA (lista para futuro) */
+/* CLASE BLOQUEADA (para futuro) */
 .materia.bloqueada{
-  background:#c6bdd9; /* lila grisáceo */
+  background:#c6bdd9;
   color:#5e5670;
   cursor:not-allowed;
 }
@@ -230,10 +244,10 @@ h1{
 </div>
 
 <script>
-document.querySelectorAll(".materia").forEach(m=>{
-  m.addEventListener("click",()=>{
-    if(!m.classList.contains("bloqueada")){
-      m.classList.toggle("completada");
+document.querySelectorAll(".materia").forEach(materia=>{
+  materia.addEventListener("click",()=>{
+    if(!materia.classList.contains("bloqueada")){
+      materia.classList.toggle("completada");
     }
   });
 });
@@ -241,4 +255,3 @@ document.querySelectorAll(".materia").forEach(m=>{
 
 </body>
 </html>
-
