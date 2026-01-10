@@ -96,6 +96,41 @@ h1{
 #guardar:hover{
   background:var(--boton-hover);
 }
+  body{
+    background:#f4ecfb;
+  }
+
+  .periodo{
+    background:#dcd0f3;
+  }
+
+  .materia{
+    background:#efe9fb;
+    color:#6a4aa3;
+  }
+
+  /* ⬇⬇⬇ PEGA ESTO AQUÍ ⬇⬇⬇ */
+
+  .materia.completada{
+    color:#c39bd3;
+  }
+
+  .materia.completada::after{
+    content:"";
+    position:absolute;
+    left:10px;
+    right:10px;
+    top:50%;
+    height:2px;
+    background:#e8a6d8;
+    transform:scaleX(0);
+    transform-origin:left;
+    animation:tachado 0.35s ease forwards;
+  }
+
+  @keyframes tachado{
+    to{ transform:scaleX(1); }
+  }
 </style>
 </head>
 
