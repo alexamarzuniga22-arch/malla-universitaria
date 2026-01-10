@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Medicina y Cirugía</title>
+<div id="contador">Materias aprobadas: 0</div>
 
 <style>
   #contador-global
@@ -108,7 +109,7 @@ h1{
 <body>
 
 <h1>Medicina y Cirugía</h1>
-<p id="contador-global">Materias aprobadas: 0</p>
+
 
 
 <div class="malla">
@@ -270,13 +271,35 @@ h1{
 </div>
 
 <script>
-document.querySelectorAll(".materia").forEach(materia=>{
-  materia.addEventListener("click",()=>{
-    if(!materia.classList.contains("bloqueada")){
-      materia.classList.toggle("completada");
+const materias = document.querySelectorAll(".materia");
+const contador = document.getElementById("contador");
+
+function actualizar(){
+  const aprobadas = document.querySelectorAll(".materia.tachada").length;
+  contador.textContent = "Materias aprobadas: " + aprobadas;
+
+  materias.forEach(m=>{
+    const req = m.dataset.req;
+    if(req){
+      const requisitos = req.split("|");
+      const cumplidos = requisitos.every(r=>{
+        const mat = [...materias].find(x => x.textContent === r);
+        return mat && mat.classList.contains("tachada");
+      });
+      m.classList.toggle("bloqueada", !cumplidos);
     }
   });
+}
+
+materias.forEach(m=>{
+  m.addEventListener("click", ()=>{
+    if(m.classList.contains("bloqueada")) return;
+    m.classList.toggle("tachada");
+    actualizar();
+  });
 });
+
+actualizar();
 </script>
 
 </body>
