@@ -5,132 +5,116 @@
 <title>Medicina y Cirugía</title>
 
 <style>
-/* ===== COLORES ===== */
-:root{
-  --fondo: #f3ecfb;
-  --cuadro: #dcd0f4;
-  --materia: #efe9fb;
-  --texto: #5b3a8c;
-  --tachado: #9b8bbf;
-  --boton: #6b3fa0;
-  --boton-hover:#56308a;
+/* ---------- CONTADOR ---------- */
+#contador{
+  text-align:center;
+  font-size:15px;
+  color:#5a3d91;
+  margin-bottom:20px;
 }
 
-/* ===== BASE ===== */
+/* ---------- BODY ---------- */
 body{
   margin:0;
   padding:30px;
-  background:var(--fondo);
   font-family:"Times New Roman", serif;
-  color:var(--texto);
+  background:#efe6ff; /* lila claro */
 }
 
+/* ---------- TÍTULO ---------- */
 h1{
   text-align:center;
-  margin-bottom:5px;
+  color:#5a2d82;
+  margin-bottom:8px;
 }
 
-#contador{
-  text-align:center;
-  font-size:16px;
-  margin-bottom:30px;
-}
-
-/* ===== GRID ===== */
-.grid{
+/* ---------- MALLA (4 POR FILA) ---------- */
+.malla{
   display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns:repeat(4, 1fr);
   gap:25px;
 }
 
-/* ===== CUADROS ===== */
-.periodo{
-  background:var(--cuadro);
-  padding:18px;
-  border-radius:18px;
+@media (max-width:1100px){
+  .malla{ grid-template-columns:repeat(3, 1fr); }
+}
+@media (max-width:800px){
+  .malla{ grid-template-columns:repeat(2, 1fr); }
+}
+@media (max-width:500px){
+  .malla{ grid-template-columns:1fr; }
 }
 
+/* ---------- CUADRO PERIODO ---------- */
+.periodo{
+  background:#d9ccf2; /* un poco más oscuro que materias */
+  border-radius:20px;
+  padding:20px;
+}
+
+/* ---------- TÍTULO PERIODO ---------- */
 .periodo h2{
   text-align:center;
-  font-size:18px;
-  margin-bottom:12px;
+  color:#4b2673;
+  margin-bottom:15px;
 }
 
-/* ===== MATERIAS ===== */
-.materia{
-  background:var(--materia);
-  padding:10px;
-  margin-bottom:8px;
-  border-radius:14px;
-  cursor:pointer;
-  text-align:center;
-  transition:0.3s;
-}
-
-.materia.aprobada{
-  background:#cfc3e9;
-  color:var(--tachado);
-  text-decoration:line-through;
-}
-  .periodo.dos-columnas .materias{
-  display:grid;
-  grid-template-columns: 1fr 1fr;
+/* ---------- LISTAS ---------- */
+.lista{
+  display:flex;
+  flex-direction:column;
   gap:10px;
 }
 
+.lista-doble{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
 
-/* ===== BOTÓN ===== */
-#guardar{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:var(--boton);
-  color:white;
-  border:none;
-  padding:12px 20px;
-  border-radius:25px;
+/* ---------- MATERIA NORMAL ---------- */
+.materia{
+  position:relative;
+  background:#ebe3fa; /* lila de materia */
+  color:#4b2673;
+  padding:8px 10px;
+  border-radius:10px;
   cursor:pointer;
-  font-size:14px;
+  text-align:center;
+  transition:background 0.4s ease, color 0.4s ease;
 }
 
-#guardar:hover{
-  background:var(--boton-hover);
+/* ---------- MATERIA TACHADA ---------- */
+.materia.completada{
+  background:#f0c7dd; /* rosa pastel */
+  color:#4b2673;
 }
-  body{
-    background:#f4ecfb;
-  }
 
-  .periodo{
-    background:#dcd0f3;
-  }
+/* línea de tachado animada */
+.materia.completada::after{
+  content:"";
+  position:absolute;
+  left:10px;
+  right:10px;
+  top:50%;
+  height:2px;
+  background:#d98bbd;
+  transform:scaleX(0);
+  transform-origin:left;
+  animation:tachado 0.35s ease forwards;
+}
 
-  .materia{
-    background:#efe9fb;
-    color:#6a4aa3;
-  }
+@keyframes tachado{
+  to{ transform:scaleX(1); }
+}
 
-  /* ⬇⬇⬇ PEGA ESTO AQUÍ ⬇⬇⬇ */
+/* ---------- MATERIA BLOQUEADA ---------- */
+.materia.bloqueada{
+  background:#c6bdd9; /* lila grisáceo */
+  color:#5e5670;
+  cursor:not-allowed;
+}
 
-  .materia.completada{
-    color:#c39bd3;
-  }
-
-  .materia.completada::after{
-    content:"";
-    position:absolute;
-    left:10px;
-    right:10px;
-    top:50%;
-    height:2px;
-    background:#e8a6d8;
-    transform:scaleX(0);
-    transform-origin:left;
-    animation:tachado 0.35s ease forwards;
-  }
-
-  @keyframes tachado{
-    to{ transform:scaleX(1); }
-  }
 </style>
 </head>
 
