@@ -1,200 +1,199 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Malla Curricular Medicina</title>
+    <meta charset="UTF-8">
+    <title>Medicina y Cirugía</title>
 
-<style>
-body{
-  font-family: Arial, sans-serif;
-  background:#f4f6f8;
-  padding:20px;
-}
+    <style>
+        body {
+            font-family: "Times New Roman", Times, serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
 
-h1{
-  text-align:center;
-}
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
 
-#contador{
-  text-align:center;
-  font-size:18px;
-  margin-bottom:25px;
-}
+        .malla {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
 
-.malla{
-  display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
-  gap:20px;
-}
+        .periodo {
+            background-color: #ffffff;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            min-height: 260px;
+            box-sizing: border-box;
+        }
 
-.periodo{
-  background:white;
-  border-radius:12px;
-  padding:15px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.08);
-}
+        .periodo h2 {
+            text-align: center;
+            margin: 5px 0 10px 0;
+            font-size: 18px;
+        }
 
-.periodo h2{
-  text-align:center;
-  margin-bottom:10px;
-}
+        .materia {
+            border: 1px solid #999;
+            border-radius: 6px;
+            padding: 6px;
+            margin-bottom: 6px;
+            text-align: center;
+            cursor: pointer;
+        }
 
-.materia{
-  background:#ececec;
-  border-radius:8px;
-  padding:8px;
-  margin-bottom:8px;
-  cursor:pointer;
-  transition:0.2s;
-}
-
-.materia:hover{
-  background:#ddd;
-}
-
-.materia.aprobada{
-  background:#c8e6c9;
-  color:#2e7d32;
-  text-decoration:line-through;
-}
-</style>
+        .materia.tachada {
+            text-decoration: line-through;
+            background-color: #e0e0e0;
+            color: #555;
+        }
+    </style>
 </head>
 
 <body>
 
-<h1>Malla Curricular – Medicina</h1>
-<div id="contador">Materias aprobadas: 0</div>
+<h1>Medicina y Cirugía</h1>
 
 <div class="malla">
 
-<div class="periodo">
-<h2>Periodo 1</h2>
-<div class="materia">Física Médica</div>
-<div class="materia">Química Médica</div>
-<div class="materia">Matemáticas</div>
-<div class="materia">Inglés I</div>
-<div class="materia">Filosofía</div>
-<div class="materia">Español</div>
-</div>
+    <!-- PERIODO 1 -->
+    <div class="periodo">
+        <h2>Periodo 1</h2>
+        <div class="materia">Física Médica</div>
+        <div class="materia">Química Médica</div>
+        <div class="materia">Matemáticas</div>
+        <div class="materia">Inglés I</div>
+        <div class="materia">Filosofía</div>
+        <div class="materia">Español</div>
+    </div>
 
-<div class="periodo">
-<h2>Periodo 2</h2>
-<div class="materia">Biología Médica</div>
-<div class="materia">Química Médica II</div>
-<div class="materia">Ética</div>
-<div class="materia">Inglés II</div>
-<div class="materia">Sociología</div>
-<div class="materia">Historia de Honduras</div>
-</div>
+    <!-- PERIODO 2 -->
+    <div class="periodo">
+        <h2>Periodo 2</h2>
+        <div class="materia">Biología Médica</div>
+        <div class="materia">Química Médica II</div>
+        <div class="materia">Ética</div>
+        <div class="materia">Inglés II</div>
+        <div class="materia">Sociología</div>
+        <div class="materia">Historia de Honduras</div>
+    </div>
 
-<div class="periodo">
-<h2>Periodo 3</h2>
-<div class="materia">Biofísica</div>
-<div class="materia">Arte o Deporte</div>
-<div class="materia">Bioestadística</div>
-<div class="materia">Inglés III</div>
-<div class="materia">Educación Ambiental</div>
-<div class="materia">Introducción a la Salud Pública</div>
-</div>
+    <!-- PERIODO 3 -->
+    <div class="periodo">
+        <h2>Periodo 3</h2>
+        <div class="materia">Biofísica</div>
+        <div class="materia">Arte o Deporte</div>
+        <div class="materia">Bioestadística</div>
+        <div class="materia">Inglés III</div>
+        <div class="materia">Educación Ambiental</div>
+        <div class="materia">Introducción a la Salud Pública</div>
+    </div>
 
-<div class="periodo">
-<h2>Periodo 4</h2>
-<div class="materia">Anatomía Macro</div>
-<div class="materia">Embriología</div>
-<div class="materia">Neuroanatomía</div>
-<div class="materia">Anatomía Micro</div>
-</div>
+    <!-- PERIODO 4 -->
+    <div class="periodo">
+        <h2>Periodo 4</h2>
+        <div class="materia">Anatomía Macro</div>
+        <div class="materia">Embriología</div>
+        <div class="materia">Neuroanatomía</div>
+        <div class="materia">Anatomía Micro</div>
+    </div>
 
-<div class="periodo">
-<h2>Periodo 5</h2>
-<div class="materia">Fisiología</div>
-<div class="materia">Bioquímica</div>
-<div class="materia">Psicología Médica</div>
-<div class="materia">Salud Pública I</div>
-</div>
+    <!-- PERIODO 5 -->
+    <div class="periodo">
+        <h2>Periodo 5</h2>
+        <div class="materia">Fisiología</div>
+        <div class="materia">Bioquímica</div>
+        <div class="materia">Psicología Médica</div>
+        <div class="materia">Salud Pública I</div>
+    </div>
 
-<div class="periodo">
-<h2>Periodo 6</h2>
-<div class="materia">Microbiología</div>
-<div class="materia">Genética</div>
-<div class="materia">Servicio Social Formativo</div>
-<div class="materia">Salud Pública II</div>
-</div>
+    <!-- PERIODO 6 -->
+    <div class="periodo">
+        <h2>Periodo 6</h2>
+        <div class="materia">Microbiología</div>
+        <div class="materia">Genética</div>
+        <div class="materia">Servicio Social Formativo</div>
+        <div class="materia">Salud Pública II</div>
+    </div>
 
-<div class="periodo">
-<h2>Periodo 7</h2>
-<div class="materia">Patología I</div>
-<div class="materia">Farmacología I</div>
-<div class="materia">Fisiopatología I</div>
-<div class="materia">Introducción a la Clínica I</div>
-</div>
+    <!-- PERIODO 7 -->
+    <div class="periodo">
+        <h2>Periodo 7</h2>
+        <div class="materia">Patología I</div>
+        <div class="materia">Farmacología I</div>
+        <div class="materia">Fisiopatología I</div>
+        <div class="materia">Introducción a la Clínica I</div>
+    </div>
 
-<div class="periodo">
-<h2>Periodo 8</h2>
-<div class="materia">Patología II</div>
-<div class="materia">Farmacología II</div>
-<div class="materia">Fisiopatología II</div>
-<div class="materia">Introducción a la Clínica II</div>
-<div class="materia">Psicopatología</div>
-</div>
+    <!-- PERIODO 8 -->
+    <div class="periodo">
+        <h2>Periodo 8</h2>
+        <div class="materia">Patología II</div>
+        <div class="materia">Farmacología II</div>
+        <div class="materia">Fisiopatología II</div>
+        <div class="materia">Introducción a la Clínica II</div>
+        <div class="materia">Psicopatología</div>
+    </div>
 
-<div class="periodo">
-<h2>Periodo 9 – 10</h2>
-<div class="materia">Cirugía I</div>
-<div class="materia">Medicina I</div>
-<div class="materia">Radiología</div>
-<div class="materia">Técnicas y Procedimientos Médicos</div>
-<div class="materia">Gineco Obstetricia I</div>
-<div class="materia">Pediatría</div>
-<div class="materia">Epidemiología</div>
-<div class="materia">Psiquiatría</div>
-<div class="materia">Salud Pública III</div>
-</div>
+    <!-- PERIODO 9 Y 10 -->
+    <div class="periodo">
+        <h2>Periodo 9 y 10</h2>
+        <div class="materia">Cirugía I</div>
+        <div class="materia">Medicina I</div>
+        <div class="materia">Radiología</div>
+        <div class="materia">Técnicas y Procedimientos Médicos</div>
+        <div class="materia">Gineco Obstetricia I</div>
+        <div class="materia">Pediatría</div>
+        <div class="materia">Epidemiología</div>
+        <div class="materia">Psiquiatría</div>
+        <div class="materia">Salud Pública III</div>
+    </div>
 
-<div class="periodo">
-<h2>Periodo 11 – 12</h2>
-<div class="materia">Clínico Cirugía II</div>
-<div class="materia">Urología</div>
-<div class="materia">Clínica Médica II</div>
-<div class="materia">Clínica Gineco Obstetricia II</div>
-<div class="materia">Clínica Pediatría</div>
-<div class="materia">Oftalmología</div>
-<div class="materia">Medicina Legal</div>
-<div class="materia">Radiología II</div>
-<div class="materia">Medicina Psicosomática</div>
-<div class="materia">Higiene Mental</div>
-<div class="materia">Neurología</div>
-<div class="materia">Ortopedia</div>
-<div class="materia">Dermatología</div>
-<div class="materia">Salud Pública IV</div>
-<div class="materia">Otorrinolaringología</div>
-</div>
+    <!-- PERIODO 11 Y 12 -->
+    <div class="periodo">
+        <h2>Periodo 11 y 12</h2>
+        <div class="materia">Clínica Cirugía II</div>
+        <div class="materia">Urología</div>
+        <div class="materia">Clínica Médica II</div>
+        <div class="materia">Clínica Gineco Obstetricia II</div>
+        <div class="materia">Clínica Pediatría</div>
+        <div class="materia">Oftalmología</div>
+        <div class="materia">Medicina Legal</div>
+        <div class="materia">Radiología II</div>
+        <div class="materia">Medicina Psicosomática</div>
+        <div class="materia">Higiene Mental</div>
+        <div class="materia">Neurología</div>
+        <div class="materia">Ortopedia</div>
+        <div class="materia">Dermatología</div>
+        <div class="materia">Salud Pública IV</div>
+        <div class="materia">Otorrinolaringología</div>
+    </div>
 
-<div class="periodo">
-<h2>Internado Rotatorio</h2>
-<div class="materia">Terapéutica Clínica</div>
-<div class="materia">Internado en Cirugía</div>
-<div class="materia">Internado en Gineco-Obstetricia</div>
-<div class="materia">Internado en Medicina</div>
-<div class="materia">Internado en Pediatría</div>
-</div>
+    <!-- INTERNADO -->
+    <div class="periodo">
+        <h2>Internado Rotatorio</h2>
+        <div class="materia">Terapéutica Clínica</div>
+        <div class="materia">Internado en Cirugía</div>
+        <div class="materia">Internado en Gineco-Obstetricia</div>
+        <div class="materia">Internado en Medicina</div>
+        <div class="materia">Internado en Pediatría</div>
+    </div>
 
 </div>
 
 <script>
-const contador = document.getElementById("contador");
+    const materias = document.querySelectorAll(".materia");
 
-function actualizar(){
-  const aprobadas = document.querySelectorAll(".materia.aprobada").length;
-  contador.textContent = "Materias aprobadas: " + aprobadas;
-}
-
-document.querySelectorAll(".materia").forEach(m=>{
-  m.addEventListener("click",()=>{
-    m.classList.toggle("aprobada");
-    actualizar();
-  });
-});
+    materias.forEach(materia => {
+        materia.addEventListener("click", () => {
+            materia.classList.toggle("tachada");
+        });
+    });
 </script>
 
 </body>
