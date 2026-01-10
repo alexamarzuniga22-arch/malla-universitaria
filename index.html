@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Medicina y Cirugía</title>
+<p id="contador-global">Materias aprobadas: 0</p>
 
 <style>
 body{
@@ -258,14 +259,23 @@ h1{
 </div>
 
 <script>
-document.querySelectorAll(".materia").forEach(materia=>{
-  materia.addEventListener("click",()=>{
-    if(!materia.classList.contains("bloqueada")){
-      materia.classList.toggle("completada");
-    }
+document.querySelectorAll('.materia').forEach(materia => {
+  materia.addEventListener('click', () => {
+    materia.classList.toggle('aprobada');
+    actualizarContadorGlobal();
   });
 });
+
+function actualizarContadorGlobal(){
+  const totalAprobadas = document.querySelectorAll('.materia.aprobada').length;
+  document.getElementById('contador-global').textContent =
+    "Materias aprobadas: " + totalAprobadas;
+}
+
+// inicializa al cargar
+actualizarContadorGlobal();
 </script>
+
 
 </body>
 </html>
