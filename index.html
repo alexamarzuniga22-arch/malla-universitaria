@@ -258,20 +258,34 @@ const materias = document.querySelectorAll(".materia");
 const contador = document.getElementById("contador");
 
 function actualizar(){
-  const aprobadas = document.querySelectorAll(".materia.tachada").length;
+  const aprobadas = document.querySelectorAll(".materia.completada").length;
   contador.textContent = "Materias aprobadas: " + aprobadas;
+
+  materias.forEach(m=>{
+    const req = m.dataset.req;
+    if(req){
+      const requisitos = req.split("|");
+      const cumplidos = requisitos.every(r=>{
+        const mat = [...materias].find(x => x.textContent === r);
+        return mat && mat.classList.contains("completada");
+      });
+      m.classList.toggle("bloqueada", !cumplidos);
+    }
+  });
 }
 
 materias.forEach(m=>{
   m.addEventListener("click", ()=>{
     if(m.classList.contains("bloqueada")) return;
-    m.classList.toggle("tachada");
+    m.classList.toggle("completada");
     actualizar();
   });
 });
 
 actualizar();
 </script>
+
+
 
 </body>
 </html>
