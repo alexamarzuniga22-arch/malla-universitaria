@@ -1,74 +1,74 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <title>Medicina y Cirugía</title>
 
 <style>
-:root{
-  --bg: #f3effa;
-  --period-bg: #ebe4f7;
-
-  --materia: #d9c9f2;          /* materias normales */
-  --tachada: #f4c6dd;          /* rosa pastel */
-  --bloqueada: #c9c3d6;        /* lila grisáceo */
-
-  --texto: #4b3b6e;
-}
-
 body{
-  background: var(--bg);
-  font-family: system-ui, sans-serif;
   margin:0;
-  padding:20px;
-  color: var(--texto);
+  font-family:"Times New Roman", serif;
+  background:#f3eef8;
+  color:#4b2c5e;
 }
 
 h1{
-  margin-bottom:5px;
+  text-align:center;
+  margin:20px 0 5px;
 }
 
 #contador{
-  font-size:14px;
+  text-align:center;
+  font-size:16px;
   margin-bottom:20px;
 }
 
-.grid{
+.malla{
   display:grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap:14px;
+  grid-template-columns:repeat(4, 1fr);
+  gap:20px;
+  padding:20px;
 }
 
 .periodo{
-  background: var(--period-bg);
+  background:#e6d9f2;
   border-radius:14px;
-  padding:10px;
+  padding:15px;
 }
 
-.periodo h3{
-  margin:0 0 8px 0;
-  font-size:14px;
+.periodo h2{
   text-align:center;
+  margin-top:0;
+  font-size:18px;
 }
 
 .materia{
-  background: var(--materia);
-  border-radius:10px;
+  background:#d8c7ec;
+  margin:8px 0;
   padding:8px;
-  margin-bottom:6px;
-  font-size:13px;
+  border-radius:10px;
   cursor:pointer;
-  transition: background-color .4s ease, opacity .3s ease;
+  transition:all 0.4s ease;
 }
 
 .materia.tachada{
-  background: var(--tachada);
+  background:#f0c4d8;
+  text-decoration:line-through;
+  color:#5a2c44;
 }
 
 .materia.bloqueada{
-  background: var(--bloqueada);
+  background:#c6bccf;
+  color:#6b6473;
   cursor:not-allowed;
-  opacity:.6;
+}
+
+.periodo-doble{
+  grid-column:span 2;
+}
+
+.periodo-internado{
+  grid-column:span 1;
 }
 </style>
 </head>
@@ -76,111 +76,157 @@ h1{
 <body>
 
 <h1>Medicina y Cirugía</h1>
-<div id="contador">Materias aprobadas: <span id="num">0</span></div>
+<div id="contador">Materias aprobadas: 0</div>
 
-<div class="grid" id="plan"></div>
+<div class="malla">
+
+<!-- PERIODOS 1–8 -->
+<div class="periodo">
+<h2>Periodo 1</h2>
+<div class="materia" id="fisica">Física Médica</div>
+<div class="materia" id="quimica1">Química Médica</div>
+<div class="materia" id="mate">Matemáticas</div>
+<div class="materia" id="ingles1">Inglés I</div>
+<div class="materia" id="filo">Filosofía</div>
+<div class="materia" id="espanol">Español</div>
+</div>
+
+<div class="periodo">
+<h2>Periodo 2</h2>
+<div class="materia bloqueada" data-req="quimica1">Biología Médica</div>
+<div class="materia bloqueada" data-req="quimica1">Química Médica II</div>
+<div class="materia">Ética</div>
+<div class="materia bloqueada" data-req="ingles1">Inglés II</div>
+<div class="materia">Sociología</div>
+<div class="materia">Historia de Honduras</div>
+</div>
+
+<div class="periodo">
+<h2>Periodo 3</h2>
+<div class="materia bloqueada" data-req="fisica">Biofísica</div>
+<div class="materia">Arte o Deporte</div>
+<div class="materia bloqueada" data-req="mate">Bioestadística</div>
+<div class="materia bloqueada" data-req="ingles1">Inglés III</div>
+<div class="materia">Educación Ambiental</div>
+<div class="materia">Introducción a la Salud Pública</div>
+</div>
+
+<div class="periodo">
+<h2>Periodo 4</h2>
+<div class="materia bloqueada" data-req="biologia">Anatomía Macro</div>
+<div class="materia">Embriología</div>
+<div class="materia">Neuroanatomía</div>
+<div class="materia">Anatomía Micro</div>
+</div>
+
+<div class="periodo">
+<h2>Periodo 5</h2>
+<div class="materia">Fisiología</div>
+<div class="materia">Bioquímica</div>
+<div class="materia">Psicología Médica</div>
+<div class="materia">Salud Pública I</div>
+</div>
+
+<div class="periodo">
+<h2>Periodo 6</h2>
+<div class="materia">Microbiología</div>
+<div class="materia">Genética</div>
+<div class="materia">Servicio Social Formativo</div>
+<div class="materia">Salud Pública II</div>
+</div>
+
+<div class="periodo">
+<h2>Periodo 7</h2>
+<div class="materia">Patología I</div>
+<div class="materia">Farmacología I</div>
+<div class="materia">Fisiopatología I</div>
+<div class="materia">Introducción a la Clínica I</div>
+</div>
+
+<div class="periodo">
+<h2>Periodo 8</h2>
+<div class="materia">Patología II</div>
+<div class="materia">Farmacología II</div>
+<div class="materia">Fisiopatología II</div>
+<div class="materia">Introducción a la Clínica II</div>
+<div class="materia">Psicopatología</div>
+</div>
+
+<!-- 9 Y 10 -->
+<div class="periodo periodo-doble">
+<h2>Periodo 9 y 10</h2>
+<div class="materia">Cirugía I</div>
+<div class="materia">Medicina I</div>
+<div class="materia">Radiología</div>
+<div class="materia">Técnicas y Proc. Med.</div>
+<div class="materia">Gineco Obstetricia I</div>
+<div class="materia">Pediatría</div>
+<div class="materia">Epidemiología</div>
+<div class="materia">Psiquiatría</div>
+<div class="materia">Salud Pública III</div>
+</div>
+
+<!-- 11 Y 12 -->
+<div class="periodo periodo-doble">
+<h2>Periodo 11 y 12</h2>
+<div class="materia">Clínica Cirugía II</div>
+<div class="materia">Urología</div>
+<div class="materia">Clínica Médica II</div>
+<div class="materia">Clínica Gineco Obstetricia II</div>
+<div class="materia">Clínica Pediatría</div>
+<div class="materia">Oftalmología</div>
+<div class="materia">Medicina Legal</div>
+<div class="materia">Radiología II</div>
+<div class="materia">Medicina Psicosomática</div>
+<div class="materia">Higiene Mental</div>
+<div class="materia">Neurología</div>
+<div class="materia">Ortopedia</div>
+<div class="materia">Dermatología</div>
+<div class="materia">Salud Pública IV</div>
+<div class="materia">Otorrinolaringología</div>
+</div>
+
+<!-- INTERNADO -->
+<div class="periodo periodo-internado">
+<h2>Internado Rotatorio</h2>
+<div class="materia">Terapéutica Clínica</div>
+<div class="materia">Internado en Cirugía</div>
+<div class="materia">Internado en Gineco-Obstetricia</div>
+<div class="materia">Internado en Medicina</div>
+<div class="materia">Internado en Pediatría</div>
+</div>
+
+</div>
 
 <script>
-/* ====== PLAN CON CÓDIGOS Y PRERREQUISITOS ====== */
-const periodos = [
- {p:1, materias:[
-  {c:"BIO101", n:"Biología"},
-  {c:"QMC101", n:"Química"},
-  {c:"MAT101", n:"Matemática"},
- ]},
- {p:2, materias:[
-  {c:"BIO102", n:"Biología II", pre:["BIO101"]},
-  {c:"QMC102", n:"Química II", pre:["QMC101"]},
- ]},
- {p:3, materias:[
-  {c:"ANA201", n:"Anatomía I"},
-  {c:"HIS201", n:"Histología"},
- ]},
- {p:4, materias:[
-  {c:"ANA202", n:"Anatomía II", pre:["ANA201"]},
-  {c:"EMB202", n:"Embriología"},
- ]},
- {p:5, materias:[
-  {c:"FIS301", n:"Fisiología I"},
-  {c:"BIOQ301", n:"Bioquímica"},
- ]},
- {p:6, materias:[
-  {c:"FIS302", n:"Fisiología II", pre:["FIS301"]},
-  {c:"MIC302", n:"Microbiología"},
- ]},
- {p:7, materias:[
-  {c:"PAT401", n:"Patología I"},
-  {c:"FAR401", n:"Farmacología I"},
- ]},
- {p:8, materias:[
-  {c:"PAT402", n:"Patología II", pre:["PAT401"]},
-  {c:"FAR402", n:"Farmacología II", pre:["FAR401"]},
- ]},
- {p:9, materias:[
-  {c:"MED501", n:"Medicina I"},
-  {c:"CIR501", n:"Cirugía I"},
- ]},
- {p:10, materias:[
-  {c:"MED502", n:"Medicina II", pre:["MED501"]},
-  {c:"CIR502", n:"Cirugía II", pre:["CIR501"]},
- ]},
- {p:11, materias:[
-  {c:"PED601", n:"Pediatría"},
-  {c:"GIN601", n:"Ginecología"},
- ]},
- {p:12, materias:[
-  {c:"INT701", n:"Internado Rotatorio"},
- ]},
-];
+const materias=document.querySelectorAll(".materia");
+const contador=document.getElementById("contador");
 
-const aprobadas = new Set();
+function actualizar(){
+  const total=document.querySelectorAll(".materia.tachada").length;
+  contador.textContent="Materias aprobadas: "+total;
 
-const cont = document.getElementById("plan");
-const num = document.getElementById("num");
-
-function actualizarContador(){
-  num.textContent = aprobadas.size;
-}
-
-function puedeCursar(mat){
-  if(!mat.pre) return true;
-  return mat.pre.every(p => aprobadas.has(p));
-}
-
-function render(){
-  cont.innerHTML="";
-  periodos.forEach(per=>{
-    const d=document.createElement("div");
-    d.className="periodo";
-    d.innerHTML=`<h3>Periodo ${per.p}</h3>`;
-    per.materias.forEach(mat=>{
-      const m=document.createElement("div");
-      m.className="materia";
-      m.textContent=mat.n;
-
-      if(!puedeCursar(mat)){
+  materias.forEach(m=>{
+    if(m.dataset.req){
+      const req=document.getElementById(m.dataset.req);
+      if(!req || !req.classList.contains("tachada")){
         m.classList.add("bloqueada");
+      }else{
+        m.classList.remove("bloqueada");
       }
-
-      m.onclick=()=>{
-        if(m.classList.contains("bloqueada")) return;
-        if(m.classList.contains("tachada")){
-          m.classList.remove("tachada");
-          aprobadas.delete(mat.c);
-        }else{
-          m.classList.add("tachada");
-          aprobadas.add(mat.c);
-        }
-        actualizarContador();
-        render();
-      };
-      d.appendChild(m);
-    });
-    cont.appendChild(d);
+    }
   });
 }
 
-render();
+materias.forEach(m=>{
+  m.addEventListener("click",()=>{
+    if(m.classList.contains("bloqueada"))return;
+    m.classList.toggle("tachada");
+    actualizar();
+  });
+});
+
+actualizar();
 </script>
 
 </body>
