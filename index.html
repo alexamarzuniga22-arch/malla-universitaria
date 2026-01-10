@@ -3,16 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Medicina y Cirugía</title>
-<div id="contador">Materias aprobadas: 0</div>
 
 <style>
-  #contador-global
-    text-align:center;
-    font-size:16px;
-    color:#5a3d91;
-    margin-bottom:25px;
-}
-
 body{
   margin:0;
   padding:30px;
@@ -24,6 +16,14 @@ body{
 h1{
   text-align:center;
   color:#5a2d82;
+  margin-bottom:10px;
+}
+
+/* CONTADOR */
+#contador{
+  text-align:center;
+  font-size:18px;
+  color:#7a5bbd;
   margin-bottom:30px;
 }
 
@@ -34,7 +34,7 @@ h1{
   gap:25px;
 }
 
-/* RESPONSIVE (celular) */
+/* RESPONSIVE */
 @media (max-width:1100px){
   .malla{ grid-template-columns:repeat(3, 1fr); }
 }
@@ -59,14 +59,13 @@ h1{
   margin-bottom:15px;
 }
 
-/* LISTA NORMAL */
+/* LISTAS */
 .lista{
   display:flex;
   flex-direction:column;
   gap:10px;
 }
 
-/* LISTA DOBLE (9–10 y 11–12) */
 .lista-doble{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -81,36 +80,29 @@ h1{
   border-radius:10px;
   cursor:pointer;
   text-align:center;
-  transition:
-    background 0.4s ease,
-    color 0.4s ease,
-    text-decoration 0.4s ease;
+  transition:background 0.4s,color 0.4s,text-decoration 0.4s;
 }
 
-/* CLASE YA CURSADA (TACHADA) */
-.materia.completada{
-  background:#f0c7dd; /* rosa pastel */
+/* CLASE YA CURSADA */
+.materia.tachada{
+  background:#f0c7dd;
   color:#4b2673;
   text-decoration:line-through;
 }
 
-/* CLASE BLOQUEADA (para futuro) */
+/* CLASE BLOQUEADA */
 .materia.bloqueada{
   background:#c6bdd9;
   color:#5e5670;
   cursor:not-allowed;
 }
 </style>
-
-}
-
 </head>
 
 <body>
 
 <h1>Medicina y Cirugía</h1>
-
-
+<div id="contador">Materias aprobadas: 0</div>
 
 <div class="malla">
 
@@ -228,33 +220,24 @@ h1{
 <!-- PERIODO 11 Y 12 -->
 <div class="periodo">
 <h2>Periodo 11 y 12</h2>
-
 <div class="lista-doble">
-  <div class="materia">Clínico Cirugía II</div>
-  <div class="materia">Urología</div>
-
-  <div class="materia">Clínica Médica II</div>
-  <div class="materia">Clínica Gineco Obstetricia II</div>
-
-  <div class="materia">Clínica Pediatría</div>
-  <div class="materia">Oftalmología</div>
-
-  <div class="materia">Medicina Legal</div>
-  <div class="materia">Radiología II</div>
-
-  <div class="materia">Medicina Psicosomática</div>
-  <div class="materia">Higiene Mental</div>
-
-  <div class="materia">Neurología</div>
-  <div class="materia">Ortopedia</div>
-
-  <div class="materia">Dermatología</div>
-  <div class="materia">Salud Pública IV</div>
-
-  <div class="materia">Otorrinolaringología</div>
+<div class="materia">Clínico Cirugía II</div>
+<div class="materia">Urología</div>
+<div class="materia">Clínica Médica II</div>
+<div class="materia">Clínica Gineco Obstetricia II</div>
+<div class="materia">Clínica Pediatría</div>
+<div class="materia">Oftalmología</div>
+<div class="materia">Medicina Legal</div>
+<div class="materia">Radiología II</div>
+<div class="materia">Medicina Psicosomática</div>
+<div class="materia">Higiene Mental</div>
+<div class="materia">Neurología</div>
+<div class="materia">Ortopedia</div>
+<div class="materia">Dermatología</div>
+<div class="materia">Salud Pública IV</div>
+<div class="materia">Otorrinolaringología</div>
 </div>
 </div>
-
 
 <!-- INTERNADO -->
 <div class="periodo">
@@ -277,18 +260,6 @@ const contador = document.getElementById("contador");
 function actualizar(){
   const aprobadas = document.querySelectorAll(".materia.tachada").length;
   contador.textContent = "Materias aprobadas: " + aprobadas;
-
-  materias.forEach(m=>{
-    const req = m.dataset.req;
-    if(req){
-      const requisitos = req.split("|");
-      const cumplidos = requisitos.every(r=>{
-        const mat = [...materias].find(x => x.textContent === r);
-        return mat && mat.classList.contains("tachada");
-      });
-      m.classList.toggle("bloqueada", !cumplidos);
-    }
-  });
 }
 
 materias.forEach(m=>{
