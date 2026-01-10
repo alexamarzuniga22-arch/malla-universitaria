@@ -45,10 +45,10 @@ h1{
 .materia{
   background:#d8c7ec;
   margin:8px 0;
-  padding:8px;
-  border-radius:10px;
+  padding:10px;
+  border-radius:12px;
   cursor:pointer;
-  transition:all 0.4s ease;
+  transition:background 0.4s ease, color 0.4s ease;
 }
 
 .materia.tachada{
@@ -80,45 +80,49 @@ h1{
 
 <div class="malla">
 
-<!-- PERIODOS 1–8 -->
+<!-- PERIODO 1 -->
 <div class="periodo">
 <h2>Periodo 1</h2>
-<div class="materia" id="fisica">Física Médica</div>
-<div class="materia" id="quimica1">Química Médica</div>
-<div class="materia" id="mate">Matemáticas</div>
-<div class="materia" id="ingles1">Inglés I</div>
-<div class="materia" id="filo">Filosofía</div>
-<div class="materia" id="espanol">Español</div>
+<div class="materia">Física Médica</div>
+<div class="materia">Química Médica</div>
+<div class="materia">Matemáticas</div>
+<div class="materia">Inglés I</div>
+<div class="materia">Filosofía</div>
+<div class="materia">Español</div>
 </div>
 
+<!-- PERIODO 2 -->
 <div class="periodo">
 <h2>Periodo 2</h2>
-<div class="materia bloqueada" data-req="quimica1">Biología Médica</div>
-<div class="materia bloqueada" data-req="quimica1">Química Médica II</div>
+<div class="materia">Biología Médica</div>
+<div class="materia">Química Médica II</div>
 <div class="materia">Ética</div>
-<div class="materia bloqueada" data-req="ingles1">Inglés II</div>
+<div class="materia">Inglés II</div>
 <div class="materia">Sociología</div>
 <div class="materia">Historia de Honduras</div>
 </div>
 
+<!-- PERIODO 3 -->
 <div class="periodo">
 <h2>Periodo 3</h2>
-<div class="materia bloqueada" data-req="fisica">Biofísica</div>
+<div class="materia">Biofísica</div>
 <div class="materia">Arte o Deporte</div>
-<div class="materia bloqueada" data-req="mate">Bioestadística</div>
-<div class="materia bloqueada" data-req="ingles1">Inglés III</div>
+<div class="materia">Bioestadística</div>
+<div class="materia">Inglés III</div>
 <div class="materia">Educación Ambiental</div>
 <div class="materia">Introducción a la Salud Pública</div>
 </div>
 
+<!-- PERIODO 4 -->
 <div class="periodo">
 <h2>Periodo 4</h2>
-<div class="materia bloqueada" data-req="biologia">Anatomía Macro</div>
+<div class="materia">Anatomía Macro</div>
 <div class="materia">Embriología</div>
 <div class="materia">Neuroanatomía</div>
 <div class="materia">Anatomía Micro</div>
 </div>
 
+<!-- PERIODO 5 -->
 <div class="periodo">
 <h2>Periodo 5</h2>
 <div class="materia">Fisiología</div>
@@ -127,6 +131,7 @@ h1{
 <div class="materia">Salud Pública I</div>
 </div>
 
+<!-- PERIODO 6 -->
 <div class="periodo">
 <h2>Periodo 6</h2>
 <div class="materia">Microbiología</div>
@@ -135,6 +140,7 @@ h1{
 <div class="materia">Salud Pública II</div>
 </div>
 
+<!-- PERIODO 7 -->
 <div class="periodo">
 <h2>Periodo 7</h2>
 <div class="materia">Patología I</div>
@@ -143,6 +149,7 @@ h1{
 <div class="materia">Introducción a la Clínica I</div>
 </div>
 
+<!-- PERIODO 8 -->
 <div class="periodo">
 <h2>Periodo 8</h2>
 <div class="materia">Patología II</div>
@@ -203,17 +210,18 @@ const materias=document.querySelectorAll(".materia");
 const contador=document.getElementById("contador");
 
 function actualizar(){
-  const total=document.querySelectorAll(".materia.tachada").length;
-  contador.textContent="Materias aprobadas: "+total;
+  contador.textContent="Materias aprobadas: "+
+  document.querySelectorAll(".materia.tachada").length;
 
   materias.forEach(m=>{
-    if(m.dataset.req){
-      const req=document.getElementById(m.dataset.req);
-      if(!req || !req.classList.contains("tachada")){
-        m.classList.add("bloqueada");
-      }else{
-        m.classList.remove("bloqueada");
-      }
+    const req=m.dataset.req;
+    if(req){
+      const requisitos=req.split("|");
+      const cumplidos=requisitos.every(r=>{
+        const mat=[...materias].find(x=>x.textContent===r);
+        return mat && mat.classList.contains("tachada");
+      });
+      m.classList.toggle("bloqueada",!cumplidos);
     }
   });
 }
@@ -231,3 +239,4 @@ actualizar();
 
 </body>
 </html>
+
