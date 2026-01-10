@@ -1,127 +1,199 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Medicina y Cirugía</title>
+<meta charset="UTF-8">
+<title>Medicina y Cirugía</title>
 
-  <style>
-    body{
-      font-family: "Times New Roman", serif;
-      background: #efe9fb;
-      margin: 0;
-      padding: 40px;
-    }
-
-    h1{
-      text-align: center;
-      color: #5a2d82;
-    }
-
-    /* BOTÓN GUARDAR PROGRESO */
-    #loginBtn{
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #6b3fa0;
-      color: white;
-      border: none;
-      padding: 12px 18px;
-      border-radius: 25px;
-      font-size: 14px;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      z-index: 9999;
-    }
-
-    #loginBtn:hover{
-      background: #5a2d82;
-    }
-  
-</style>
-  <style>
-#loginBtn{
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #6b3fa0;
-  color: white;
-  border: none;
-  padding: 12px 18px;
-  border-radius: 25px;
-  font-family: "Times New Roman", serif;
-  font-size: 14px;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  z-index: 9999;
+<style>
+body{
+  margin:0;
+  padding:30px;
+  font-family:"Times New Roman", serif;
+  background:#ece6f6;
+  color:#4b2c6f;
 }
-#loginBtn:hover{
-  background: #5a2d82;
+
+h1{
+  text-align:center;
+  margin-bottom:5px;
+}
+
+h2{
+  text-align:center;
+  font-weight:normal;
+  margin-bottom:40px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
+}
+
+.periodo{
+  background:#dcd1f2;
+  border-radius:20px;
+  padding:20px;
+}
+
+.periodo h3{
+  text-align:center;
+}
+
+.materia{
+  background:#f6f2ff;
+  border-radius:12px;
+  padding:10px;
+  margin:8px 0;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.materia.aprobada{
+  background:#cfc3eb;
+  color:#6a5a8a;
+  text-decoration:line-through;
+}
+
+.materia.bloqueada{
+  background:#bfb6d6;
+  color:#7a7390;
+  cursor:not-allowed;
+  opacity:0.7;
+}
+
+/* BOTÓN */
+#guardarBtn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#6b3fa0;
+  color:white;
+  border:none;
+  padding:14px 20px;
+  border-radius:25px;
+  font-family:"Times New Roman", serif;
+  cursor:pointer;
+  box-shadow:0 4px 10px rgba(0,0,0,0.25);
+}
+#guardarBtn:hover{
+  background:#5a2d82;
 }
 </style>
-
 </head>
 
 <body>
 
-  <h1>Medicina y Cirugía</h1>
-  <p style="text-align:center;">Tu progreso se guardará con tu cuenta de Google</p>
+<h1>Medicina y Cirugía</h1>
+<h2>Materias aprobadas: <span id="contador">0</span></h2>
 
-  <!-- BOTÓN -->
-  <button id="loginBtn">Guardar progreso</button>
+<div class="grid">
 
-  <!-- FIREBASE -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+<div class="periodo">
+<h3>Periodo 1</h3>
+<div class="materia">Física Médica</div>
+<div class="materia">Química Médica</div>
+<div class="materia">Matemáticas</div>
+<div class="materia">Inglés I</div>
+<div class="materia">Filosofía</div>
+<div class="materia">Español</div>
+</div>
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyDgc7TEtusHQLc_fNUfDAmHv8POQa2t9Fc",
-    authDomain: "medina-y-cirugia.firebaseapp.com",
-    projectId: "medina-y-cirugia",
-    storageBucket: "medina-y-cirugia.firebasestorage.app",
-    messagingSenderId: "366477595660",
-    appId: "1:366477595660:web:08a9581745e08896fc0a29",
-    measurementId: "G-HEJGVXZC4G"
-    };
+<div class="periodo">
+<h3>Periodo 2</h3>
+<div class="materia">Biología Médica</div>
+<div class="materia bloqueada">Química Médica II</div>
+<div class="materia bloqueada">Ética</div>
+<div class="materia bloqueada">Inglés II</div>
+<div class="materia">Sociología</div>
+<div class="materia">Historia de Honduras</div>
+</div>
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const provider = new GoogleAuthProvider();
+<div class="periodo">
+<h3>Periodo 3</h3>
+<div class="materia bloqueada">Biofísica</div>
+<div class="materia">Arte o Deporte</div>
+<div class="materia bloqueada">Bioestadística</div>
+<div class="materia bloqueada">Inglés III</div>
+<div class="materia">Educación Ambiental</div>
+<div class="materia bloqueada">Introducción a la Salud Pública</div>
+</div>
 
-    document.getElementById("loginBtn").addEventListener("click", () => {
-      signInWithPopup(auth, provider)
-        .then(() => {
-          alert("Progreso guardado con Google ✅");
-        })
-        .catch(error => {
-          alert("Error: " + error.message);
-        });
-    });
-  </script>
-<button id="loginBtn">Guardar progreso</button>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+<div class="periodo">
+<h3>Periodo 4</h3>
+<div class="materia bloqueada">Anatomía Macro</div>
+<div class="materia bloqueada">Embriología</div>
+<div class="materia bloqueada">Neuroanatomía</div>
+<div class="materia bloqueada">Anatomía Micro</div>
+</div>
 
-  const firebaseConfig = {
-    apiKey: "TU_API_KEY",
-    authDomain: "TU_AUTH_DOMAIN",
-    projectId: "TU_PROJECT_ID",
-  };
+<div class="periodo">
+<h3>Periodo 5</h3>
+<div class="materia">Fisiología</div>
+<div class="materia">Bioquímica</div>
+<div class="materia">Psicología Médica</div>
+<div class="materia">Salud Pública I</div>
+</div>
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const provider = new GoogleAuthProvider();
+<div class="periodo">
+<h3>Periodo 6</h3>
+<div class="materia">Microbiología</div>
+<div class="materia">Genética</div>
+<div class="materia">Servicio Social Formativo</div>
+<div class="materia">Salud Pública II</div>
+</div>
 
-  document.getElementById("loginBtn").addEventListener("click", () => {
-    signInWithPopup(auth, provider)
-      .then(() => {
-        alert("Progreso guardado con Google ✅");
-      })
-      .catch(error => {
-        alert(error.message);
-      });
+<div class="periodo">
+<h3>Periodo 7</h3>
+<div class="materia">Patología I</div>
+<div class="materia">Farmacología I</div>
+<div class="materia">Fisiopatología I</div>
+<div class="materia">Introducción a la Clínica I</div>
+</div>
+
+<div class="periodo">
+<h3>Periodo 8</h3>
+<div class="materia">Patología II</div>
+<div class="materia">Farmacología II</div>
+<div class="materia">Fisiopatología II</div>
+<div class="materia">Introducción a la Clínica II</div>
+<div class="materia">Psicopatología</div>
+</div>
+
+<div class="periodo">
+<h3>Periodo 9 y 10</h3>
+<div class="materia bloqueada">Rotaciones Clínicas</div>
+</div>
+
+<div class="periodo">
+<h3>Periodo 11 y 12</h3>
+<div class="materia bloqueada">Rotaciones Avanzadas</div>
+</div>
+
+<div class="periodo">
+<h3>Internado Rotatorio</h3>
+<div class="materia bloqueada">Internado</div>
+</div>
+
+</div>
+
+<button id="guardarBtn">Guardar progreso</button>
+
+<script>
+const materias = document.querySelectorAll(".materia:not(.bloqueada)");
+const contador = document.getElementById("contador");
+
+function actualizar(){
+  contador.textContent =
+    document.querySelectorAll(".materia.aprobada").length;
+}
+
+materias.forEach(m=>{
+  m.addEventListener("click",()=>{
+    m.classList.toggle("aprobada");
+    actualizar();
   });
+});
 </script>
 
 </body>
