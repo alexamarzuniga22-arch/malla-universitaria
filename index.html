@@ -5,36 +5,36 @@
 <title>Medicina y Cirugía</title>
 
 <style>
+/* ===== FONDO GENERAL (un poco más oscuro) ===== */
 body{
   margin:0;
   padding:30px;
   font-family:"Times New Roman", serif;
-  background:#f3ecff;
+  background:#e9e1f5; /* antes muy claro, ahora un poco más oscuro */
 }
 
-/* TÍTULO */
+/* ===== TÍTULO ===== */
 h1{
   text-align:center;
   color:#5a2d82;
-  margin-bottom:10px;
+  margin-bottom:5px;
 }
 
-/* CONTADOR */
+/* ===== CONTADOR ===== */
 #contador{
   text-align:center;
-  font-size:18px;
-  color:#7a5bbd;
+  font-size:16px;
+  color:#6a4bb3;
   margin-bottom:30px;
 }
 
-/* MALLA GENERAL → SOLO 4 POR FILA */
+/* ===== MALLA GENERAL (4 POR FILA) ===== */
 .malla{
   display:grid;
   grid-template-columns:repeat(4, 1fr);
   gap:25px;
 }
 
-/* RESPONSIVE */
 @media (max-width:1100px){
   .malla{ grid-template-columns:repeat(3, 1fr); }
 }
@@ -45,21 +45,21 @@ h1{
   .malla{ grid-template-columns:1fr; }
 }
 
-/* TARJETA PERIODO */
+/* ===== TARJETA PERIODO ===== */
 .periodo{
   background:#d7c9f1;
-  border-radius:20px;
+  border-radius:22px;
   padding:20px;
 }
 
-/* TÍTULO PERIODO */
+/* ===== TÍTULO PERIODO ===== */
 .periodo h2{
   text-align:center;
   color:#4b2673;
   margin-bottom:15px;
 }
 
-/* LISTAS */
+/* ===== LISTAS ===== */
 .lista{
   display:flex;
   flex-direction:column;
@@ -72,34 +72,36 @@ h1{
   gap:10px;
 }
 
-/* MATERIA */
+/* ===== MATERIA NORMAL ===== */
 .materia{
-  background:#ebe3fa;
+  background:#f0eaff;
   color:#4b2673;
-  padding:8px 10px;
-  border-radius:10px;
+  padding:9px 10px;
+  border-radius:12px;
   cursor:pointer;
   text-align:center;
-  transition:background 0.4s,color 0.4s,text-decoration 0.4s;
+  transition:
+    background 0.5s ease,
+    color 0.5s ease,
+    text-decoration 0.5s ease,
+    opacity 0.5s ease;
 }
 
-/* CLASE YA CURSADA (TACHADA) */
+/* ===== MATERIA APROBADA ===== */
 .materia.completada{
-  background:#f0c7dd;        /* rosa pastel */
+  background:#f0c7dd;   /* rosa pastel */
   color:#4b2673;
   text-decoration:line-through;
 }
 
-
-}
-
+/* ===== MATERIA BLOQUEADA (LILA GRISÁCEO BIEN VISIBLE) ===== */
 .materia.bloqueada{
-  background:#c6bdd9 !important;   /* lila grisáceo */
-  color:#5e5670 !important;
+  background:#b8aecf;   /* MÁS OSCURO, lila grisáceo */
+  color:#5c5670;
   cursor:not-allowed;
-  text-decoration:none !important;
+  opacity:0.85;
+  text-decoration:none;
 }
-
 </style>
 </head>
 
@@ -159,7 +161,6 @@ h1{
 <div class="materia" data-req="Biofísica|Inglés III|Educación Ambiental">Anatomía Micro</div>
 </div>
 </div>
-
 <!-- PERIODO 5 -->
 <div class="periodo">
 <h2>Periodo 5</h2>
@@ -225,7 +226,7 @@ h1{
 <div class="periodo">
 <h2>Periodo 11 y 12</h2>
 <div class="lista-doble">
-<div class="materia">Clínico Cirugía II</div>
+<div class="materia">Clínica Cirugía II</div>
 <div class="materia">Urología</div>
 <div class="materia">Clínica Médica II</div>
 <div class="materia">Clínica Gineco Obstetricia II</div>
@@ -267,13 +268,19 @@ function actualizar(){
 
   materias.forEach(m=>{
     const req = m.dataset.req;
-    if(req){
-      const requisitos = req.split("|");
-      const cumplidos = requisitos.every(r=>{
-        const mat = [...materias].find(x => x.textContent.trim() === r.trim());
-        return mat && mat.classList.contains("completada");
-      });
-      m.classList.toggle("bloqueada", !cumplidos);
+    if(!req) return;
+
+    const requisitos = req.split("|");
+    const cumplidos = requisitos.every(r=>{
+      const mat = [...materias].find(x => x.textContent.trim() === r.trim());
+      return mat && mat.classList.contains("completada");
+    });
+
+    if(!cumplidos){
+      m.classList.add("bloqueada");
+      m.classList.remove("completada");
+    }else{
+      m.classList.remove("bloqueada");
     }
   });
 }
@@ -289,8 +296,5 @@ materias.forEach(m=>{
 actualizar();
 </script>
 
-
-
 </body>
 </html>
-
