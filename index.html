@@ -1,373 +1,82 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Medicina y Cirugía</title>
+  <meta charset="UTF-8">
+  <title>Medicina y Cirugía</title>
 
-<style>
-/* ===== FONDO GENERAL (un poco más oscuro) ===== */
-body{
-  margin:0;
-  padding:30px;
-  font-family:"Times New Roman", serif;
-  background:#e9e1f5; /* antes muy claro, ahora un poco más oscuro */
-}
+  <style>
+    body{
+      font-family: "Times New Roman", serif;
+      background: #efe9fb;
+      margin: 0;
+      padding: 40px;
+    }
 
-/* ===== TÍTULO ===== */
-h1{
-  text-align:center;
-  color:#5a2d82;
-  margin-bottom:5px;
-}
+    h1{
+      text-align: center;
+      color: #5a2d82;
+    }
 
-/* ===== CONTADOR ===== */
-#contador{
-  text-align:center;
-  font-size:16px;
-  color:#6a4bb3;
-  margin-bottom:30px;
-}
+    /* BOTÓN GUARDAR PROGRESO */
+    #loginBtn{
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #6b3fa0;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 25px;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      z-index: 9999;
+    }
 
-/* ===== MALLA GENERAL (4 POR FILA) ===== */
-.malla{
-  display:grid;
-  grid-template-columns:repeat(4, 1fr);
-  gap:25px;
-}
-
-@media (max-width:1100px){
-  .malla{ grid-template-columns:repeat(3, 1fr); }
-}
-@media (max-width:800px){
-  .malla{ grid-template-columns:repeat(2, 1fr); }
-}
-@media (max-width:500px){
-  .malla{ grid-template-columns:1fr; }
-}
-
-/* ===== TARJETA PERIODO ===== */
-.periodo{
-  background:#d7c9f1;
-  border-radius:22px;
-  padding:20px;
-}
-
-/* ===== TÍTULO PERIODO ===== */
-.periodo h2{
-  text-align:center;
-  color:#4b2673;
-  margin-bottom:15px;
-}
-
-/* ===== LISTAS ===== */
-.lista{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
-.lista-doble{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-
-/* ===== MATERIA NORMAL ===== */
-.materia{
-  background:#f0eaff;
-  color:#4b2673;
-  padding:9px 10px;
-  border-radius:12px;
-  cursor:pointer;
-  text-align:center;
-  transition:
-    background 0.5s ease,
-    color 0.5s ease,
-    text-decoration 0.5s ease,
-    opacity 0.5s ease;
-}
-
-/* ===== MATERIA APROBADA ===== */
-.materia.completada{
-  background:#f0c7dd;   /* rosa pastel */
-  color:#4b2673;
-  text-decoration:line-through;
-}
-
-/* ===== MATERIA BLOQUEADA (LILA GRISÁCEO BIEN VISIBLE) ===== */
-.materia.bloqueada{
-  background:#b8aecf;   /* MÁS OSCURO, lila grisáceo */
-  color:#5c5670;
-  cursor:not-allowed;
-  opacity:0.85;
-  text-decoration:none;
-}
-</style>
+    #loginBtn:hover{
+      background: #5a2d82;
+    }
+  </style>
 </head>
 
 <body>
 
-<h1>Medicina y Cirugía</h1>
-<div id="contador">Materias aprobadas: 0</div>
+  <h1>Medicina y Cirugía</h1>
+  <p style="text-align:center;">Tu progreso se guardará con tu cuenta de Google</p>
 
-<div class="malla">
+  <!-- BOTÓN -->
+  <button id="loginBtn">Guardar progreso</button>
 
-<!-- PERIODO 1 -->
-<div class="periodo">
-<h2>Periodo 1</h2>
-<div class="lista">
-<div class="materia">Física Médica</div>
-<div class="materia">Química Médica</div>
-<div class="materia">Matemáticas</div>
-<div class="materia">Inglés I</div>
-<div class="materia">Filosofía</div>
-<div class="materia">Español</div>
-</div>
-</div>
+  <!-- FIREBASE -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-<!-- PERIODO 2 -->
-<div class="periodo">
-<h2>Periodo 2</h2>
-<div class="lista">
-<div class="materia">Biología Médica</div>
-<div class="materia" data-req="Química Médica|Matemáticas">Química Médica II</div>
-<div class="materia" data-req="Filosofía">Ética</div>
-<div class="materia" data-req="Inglés I">Inglés II</div>
-<div class="materia">Sociología</div>
-<div class="materia">Historia de Honduras</div>
-</div>
-</div>
-
-<!-- PERIODO 3 -->
-<div class="periodo">
-<h2>Periodo 3</h2>
-<div class="lista">
-<div class="materia" data-req="Física Médica|Biología Médica">Biofísica</div>
-<div class="materia">Arte o Deporte</div>
-<div class="materia" data-req="Matemáticas">Bioestadística</div>
-<div class="materia" data-req="Inglés II">Inglés III</div>
-<div class="materia">Educación Ambiental</div>
-<div class="materia" data-req="Sociología|Historia de Honduras">Introducción a la Salud Pública</div>
-</div>
-</div>
-
-<!-- PERIODO 4 -->
-<div class="periodo">
-<h2>Periodo 4</h2>
-<div class="lista">
-<div class="materia" data-req="Biofísica|Inglés III|Educación Ambiental">Anatomía Macro</div>
-<div class="materia" data-req="Biofísica|Inglés III|Educación Ambiental">Embriología</div>
-<div class="materia" data-req="Biofísica|Inglés III|Educación Ambiental">Neuroanatomía</div>
-<div class="materia" data-req="Biofísica|Inglés III|Educación Ambiental">Anatomía Micro</div>
-</div>
-</div>
-<!-- PERIODO 5 -->
-<div class="periodo">
-<h2>Periodo 5</h2>
-<div class="lista">
-<div class="materia">Fisiología</div>
-<div class="materia">Bioquímica</div>
-<div class="materia">Psicología Médica</div>
-<div class="materia">Salud Pública I</div>
-</div>
-</div>
-
-<!-- PERIODO 6 -->
-<div class="periodo">
-<h2>Periodo 6</h2>
-<div class="lista">
-<div class="materia">Microbiología</div>
-<div class="materia">Genética</div>
-<div class="materia">Servicio Social Formativo</div>
-<div class="materia">Salud Pública II</div>
-</div>
-</div>
-
-<!-- PERIODO 7 -->
-<div class="periodo">
-<h2>Periodo 7</h2>
-<div class="lista">
-<div class="materia">Patología I</div>
-<div class="materia">Farmacología I</div>
-<div class="materia">Fisiopatología I</div>
-<div class="materia">Introducción a la Clínica I</div>
-</div>
-</div>
-
-<!-- PERIODO 8 -->
-<div class="periodo">
-<h2>Periodo 8</h2>
-<div class="lista">
-<div class="materia">Patología II</div>
-<div class="materia">Farmacología II</div>
-<div class="materia">Fisiopatología II</div>
-<div class="materia">Introducción a la Clínica II</div>
-<div class="materia">Psicopatología</div>
-</div>
-</div>
-
-<!-- PERIODO 9 Y 10 -->
-<div class="periodo">
-<h2>Periodo 9 y 10</h2>
-<div class="lista-doble">
-<div class="materia">Cirugía I</div>
-<div class="materia">Medicina I</div>
-<div class="materia">Radiología</div>
-<div class="materia">Técnicas y Proc. Méd.</div>
-<div class="materia">Gineco Obstetricia I</div>
-<div class="materia">Pediatría</div>
-<div class="materia">Epidemiología</div>
-<div class="materia">Psiquiatría</div>
-<div class="materia">Salud Pública III</div>
-</div>
-</div>
-
-<!-- PERIODO 11 Y 12 -->
-<div class="periodo">
-<h2>Periodo 11 y 12</h2>
-<div class="lista-doble">
-<div class="materia">Clínica Cirugía II</div>
-<div class="materia">Urología</div>
-<div class="materia">Clínica Médica II</div>
-<div class="materia">Clínica Gineco Obstetricia II</div>
-<div class="materia">Clínica Pediatría</div>
-<div class="materia">Oftalmología</div>
-<div class="materia">Medicina Legal</div>
-<div class="materia">Radiología II</div>
-<div class="materia">Medicina Psicosomática</div>
-<div class="materia">Higiene Mental</div>
-<div class="materia">Neurología</div>
-<div class="materia">Ortopedia</div>
-<div class="materia">Dermatología</div>
-<div class="materia">Salud Pública IV</div>
-<div class="materia">Otorrinolaringología</div>
-</div>
-</div>
-
-<!-- INTERNADO -->
-<div class="periodo">
-<h2>Internado Rotatorio</h2>
-<div class="lista">
-<div class="materia">Terapéutica Clínica</div>
-<div class="materia">Internado en Cirugía</div>
-<div class="materia">Internado en Gineco-Obstetricia</div>
-<div class="materia">Internado en Medicina</div>
-<div class="materia">Internado en Pediatría</div>
-</div>
-</div>
-
-</div>
-
-<script>
-<!-- BOTÓN GUARDAR PROGRESO -->
-<button id="loginBtn">Guardar progreso</button>
-
-<style>
-#loginBtn{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#6b3fa0;
-  color:white;
-  border:none;
-  padding:12px 18px;
-  border-radius:25px;
-  font-family:"Times New Roman", serif;
-  font-size:14px;
-  cursor:pointer;
-  box-shadow:0 4px 10px rgba(0,0,0,0.2);
-}
-#loginBtn:hover{
-  background:#5a2d82;
-}
-</style>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-/* 🔥 TU CONFIG DE FIREBASE (NO CAMBIAR) */
-const firebaseConfig = {
- apiKey: "AIzaSyDgc7TEtusHQLc_fNUfDAmHv8POQa2t9Fc",
+    const firebaseConfig = {
+      apiKey: "AIzaSyDgc7TEtusHQLc_fNUfDAmHv8POQa2t9Fc",
     authDomain: "medina-y-cirugia.firebaseapp.com",
     projectId: "medina-y-cirugia",
     storageBucket: "medina-y-cirugia.firebasestorage.app",
     messagingSenderId: "366477595660",
     appId: "1:366477595660:web:08a9581745e08896fc0a29",
-    measurementId: "G-HEJGVXZC4G" 
-};
+    measurementId: "G-HEJGVXZC4G"
+    };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const provider = new GoogleAuthProvider();
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
 
-const materias = document.querySelectorAll(".materia");
-const contador = document.getElementById("contador");
-const btn = document.getElementById("loginBtn");
-
-let usuario = null;
-
-/* 🔐 LOGIN */
-btn.onclick = async ()=>{
-  if(!usuario){
-    await signInWithPopup(auth, provider);
-  }
-};
-
-/* 💾 GUARDAR PROGRESO */
-async function guardar(){
-  if(!usuario) return;
-
-  const aprobadas = [...materias]
-    .filter(m=>m.classList.contains("tachada"))
-    .map(m=>m.textContent);
-
-  await setDoc(doc(db,"progreso",usuario.uid),{
-    aprobadas
-  });
-}
-
-/* 📥 CARGAR PROGRESO */
-async function cargar(){
-  const ref = doc(db,"progreso",usuario.uid);
-  const snap = await getDoc(ref);
-
-  if(snap.exists()){
-    const data = snap.data().aprobadas || [];
-    materias.forEach(m=>{
-      m.classList.toggle("tachada", data.includes(m.textContent));
+    document.getElementById("loginBtn").addEventListener("click", () => {
+      signInWithPopup(auth, provider)
+        .then(() => {
+          alert("Progreso guardado con Google ✅");
+        })
+        .catch(error => {
+          alert("Error: " + error.message);
+        });
     });
-    actualizarContador();
-  }
-}
-
-/* 🔢 CONTADOR */
-function actualizarContador(){
-  const total = document.querySelectorAll(".materia.tachada").length;
-  contador.textContent = "Materias aprobadas: " + total;
-}
-
-/* 🖱️ CLICK EN MATERIAS */
-materias.forEach(m=>{
-  m.addEventListener("click", ()=>{
-    if(m.classList.contains("bloqueada")) return;
-    m.classList.toggle("tachada");
-    actualizarContador();
-    guardar();
-  });
-});
-
-/* 👤 SESIÓN */
-onAuthStateChanged(auth,(user)=>{
-  if(user){
-    usuario = user;
-    btn.textContent = "Progreso guardado ✓";
-    cargar();
-  }
-});
-</script>
+  </script>
 
 </body>
 </html>
+
