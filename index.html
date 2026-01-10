@@ -36,7 +36,29 @@
     #loginBtn:hover{
       background: #5a2d82;
     }
-  </style>
+  
+</style>
+  <style>
+#loginBtn{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #6b3fa0;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 25px;
+  font-family: "Times New Roman", serif;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  z-index: 9999;
+}
+#loginBtn:hover{
+  background: #5a2d82;
+}
+</style>
+
 </head>
 
 <body>
@@ -76,6 +98,31 @@
         });
     });
   </script>
+<button id="loginBtn">Guardar progreso</button>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "TU_API_KEY",
+    authDomain: "TU_AUTH_DOMAIN",
+    projectId: "TU_PROJECT_ID",
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  document.getElementById("loginBtn").addEventListener("click", () => {
+    signInWithPopup(auth, provider)
+      .then(() => {
+        alert("Progreso guardado con Google ✅");
+      })
+      .catch(error => {
+        alert(error.message);
+      });
+  });
+</script>
 
 </body>
 </html>
