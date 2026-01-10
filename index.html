@@ -72,6 +72,12 @@ h1{
   color:var(--tachado);
   text-decoration:line-through;
 }
+  .periodo.dos-columnas .materias{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:10px;
+}
+
 
 /* ===== BOTÓN ===== */
 #guardar{
@@ -180,8 +186,9 @@ h1{
 </div>
 
 <!-- PERIODO 9 Y 10 -->
-<div class="periodo">
+<div class="periodo dos-columnas">
 <h2>Periodo 9 y 10</h2>
+<div class="materias"> 
 <div class="materia">Cirugía I</div>
 <div class="materia">Medicina I</div>
 <div class="materia">Radiología</div>
@@ -192,10 +199,12 @@ h1{
 <div class="materia">Psiquiatría</div>
 <div class="materia">Salud Pública III</div>
 </div>
+</div>
 
 <!-- PERIODO 11 Y 12 -->
-<div class="periodo">
+<div class="periodo dos-columnas">
 <h2>Periodo 11 y 12</h2>
+<div class="materias">
 <div class="materia">Clínico Cirugía II</div>
 <div class="materia">Clínica Médica II</div>
 <div class="materia">Urología</div>
@@ -211,6 +220,7 @@ h1{
 <div class="materia">Dermatología</div>
 <div class="materia">Salud Pública IV</div>
 <div class="materia">Otorrinolaringología</div>
+</div>
 </div>
 
 <!-- INTERNADO -->
